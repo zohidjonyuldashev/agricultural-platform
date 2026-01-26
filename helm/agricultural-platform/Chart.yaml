@@ -1,21 +1,6 @@
 apiVersion: v2
 name: agricultural-platform
-description: A Helm chart for Agricultural Digital Platform - Spring Boot application with PostgreSQL
+description: Agricultural Digital Platform for DevOps Assignment
 type: application
 version: 0.1.0
 appVersion: "1.0.0"
-
-keywords:
-  - spring-boot
-  - agriculture
-  - devops
-  - postgresql
-
-maintainers:
-  - name: Zohidjon Yuldashev
-
-dependencies:
-  - name: postgresql
-    version: "15.5.0"
-    repository: https://charts.bitnami.com/bitnami
-    condition: postgresql.enabled

@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "agricultural-platform.fullname" . }}
+  name: {{ .Release.Name }}
   labels:
-    {{- include "agricultural-platform.labels" . | nindent 4 }}
+    app: {{ .Release.Name }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "agricultural-platform.selectorLabels" . | nindent 4 }}
+    app: {{ .Release.Name }}

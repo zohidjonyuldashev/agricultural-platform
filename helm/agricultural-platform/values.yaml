@@ -1,39 +1,15 @@
 replicaCount: 1
 
 image:
-  repository: ghcr.io/zohidjonyuldashev/agricultural-platform
-  pullPolicy: IfNotPresent
+  repository: zohidjon30/agricultural-platform
   tag: "1.0.0"
-
-imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
-
-# Application configuration
-app:
-  port: 8080
-  profile: "default"
-
-env:
-  DB_HOST: ""
-  DB_PORT: "5432"
-  DB_NAME: "agricultural_db"
-  DB_USERNAME: "postgres"
-  SERVER_PORT: "8080"
-
-# Secrets (base64 encoded in real scenarios)
-secrets:
-  dbPassword: "postgres"
+  pullPolicy: IfNotPresent
 
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
 
-ingress:
-  enabled: false
-
-# Resource limits and requests
 resources:
   limits:
     cpu: 500m
@@ -42,84 +18,7 @@ resources:
     cpu: 250m
     memory: 256Mi
 
-autoscaling:
-  enabled: false
-
-serviceAccount:
-  create: false
-
-# Pod configuration
-podAnnotations:
-  prometheus.io/scrape: "true"
-  prometheus.io/port: "8080"
-  prometheus.io/path: "/actuator/prometheus"
-
-podSecurityContext:
-  fsGroup: 1000
-
-securityContext:
-  runAsNonRoot: true
-  runAsUser: 1000
-  allowPrivilegeEscalation: false
-  capabilities:
-    drop:
-      - ALL
-
-# Health checks
-livenessProbe:
-  httpGet:
-    path: /actuator/health/liveness
-    port: http
-  initialDelaySeconds: 60
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
-
-readinessProbe:
-  httpGet:
-    path: /actuator/health/readiness
-    port: http
-  initialDelaySeconds: 30
-  periodSeconds: 10
-  timeoutSeconds: 5
-  failureThreshold: 3
-
-# Node selector
-nodeSelector: {}
-
-# Tolerations
-tolerations: []
-
-# Affinity rules
-affinity: {}
-
-httpRoute:
-  enabled: false
-
-# ServiceMonitor for Prometheus Operator
 serviceMonitor:
   enabled: true
   interval: 15s
-  scrapeTimeout: 10s
   path: /actuator/prometheus
-  labels: {}
-
-# PostgreSQL dependency configuration
-postgresql:
-  enabled: true
-  auth:
-    postgresPassword: "postgres"
-    username: "postgres"
-    password: "postgres"
-    database: "agricultural_db"
-  primary:
-    persistence:
-      enabled: true
-      size: 1Gi
-    resources:
-      limits:
-        cpu: 500m
-        memory: 512Mi
-      requests:
-        cpu: 250m
-        memory: 256Mi

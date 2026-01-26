@@ -2,22 +2,16 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: {{ include "agricultural-platform.fullname" . }}
+  name: {{ .Release.Name }}
   labels:
-    {{- include "agricultural-platform.labels" . | nindent 4 }}
-      {{- with .Values.serviceMonitor.labels }}
-      {{- toYaml . | nindent 4 }}
-      {{- end }}
+    app: {{ .Release.Name }}
+    release: prometheus
 spec:
   selector:
     matchLabels:
-      {{- include "agricultural-platform.selectorLabels" . | nindent 6 }}
+      app: {{ .Release.Name }}
   endpoints:
     - port: http
       path: {{ .Values.serviceMonitor.path }}
       interval: {{ .Values.serviceMonitor.interval }}
-      scrapeTimeout: {{ .Values.serviceMonitor.scrapeTimeout }}
-  namespaceSelector:
-    matchNames:
-      - {{ .Release.Namespace }}
   {{- end }}
