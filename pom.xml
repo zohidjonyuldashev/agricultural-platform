@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.agricultural</groupId>
 	<artifactId>agricultural-platform</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<name>agricultural-platform</name>
 	<description>Digital Procurement Platform for Agriculture and Food Production</description>
 	<url/>
