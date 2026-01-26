@@ -1,11 +1,9 @@
-# Default values for agricultural-platform
-
 replicaCount: 1
 
 image:
   repository: ghcr.io/zohidjonyuldashev/agricultural-platform
   pullPolicy: IfNotPresent
-  tag: "latest"
+  tag: "1.0.0"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,9 +14,8 @@ app:
   port: 8080
   profile: "default"
 
-# Environment variables for the application
 env:
-  DB_HOST: ""  # Will be set automatically if postgresql.enabled
+  DB_HOST: ""
   DB_PORT: "5432"
   DB_NAME: "agricultural_db"
   DB_USERNAME: "postgres"
@@ -28,23 +25,13 @@ env:
 secrets:
   dbPassword: "postgres"
 
-# Service configuration
 service:
   type: ClusterIP
   port: 80
   targetPort: 8080
 
-# Ingress configuration (disabled by default for local development)
 ingress:
   enabled: false
-  className: ""
-  annotations: {}
-  hosts:
-    - host: agricultural-platform.local
-      paths:
-        - path: /
-          pathType: Prefix
-  tls: []
 
 # Resource limits and requests
 resources:
@@ -55,13 +42,11 @@ resources:
     cpu: 250m
     memory: 256Mi
 
-# Autoscaling configuration
 autoscaling:
   enabled: false
-  minReplicas: 1
-  maxReplicas: 10
-  targetCPUUtilizationPercentage: 80
-  targetMemoryUtilizationPercentage: 80
+
+serviceAccount:
+  create: false
 
 # Pod configuration
 podAnnotations:
@@ -107,6 +92,9 @@ tolerations: []
 
 # Affinity rules
 affinity: {}
+
+httpRoute:
+  enabled: false
 
 # ServiceMonitor for Prometheus Operator
 serviceMonitor:
