@@ -1,0 +1,36 @@
+# Production values for agricultural-platform
+
+replicaCount: 3
+
+image:
+  pullPolicy: Always
+
+app:
+  profile: "prod"
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1024Mi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 20
+  targetCPUUtilizationPercentage: 70
+  targetMemoryUtilizationPercentage: 75
+
+postgresql:
+  primary:
+    persistence:
+      size: 10Gi
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1024Mi
+      requests:
+        cpu: 500m
+        memory: 512Mi

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "agricultural-platform.fullname" . }}-config
+  labels:
+    {{- include "agricultural-platform.labels" . | nindent 4 }}
+data:
+  SERVER_PORT: {{ .Values.env.SERVER_PORT | quote }}
+  DB_HOST: {{ include "agricultural-platform.postgresqlHost" . | quote }}
+  DB_PORT: {{ .Values.env.DB_PORT | quote }}
+  DB_NAME: {{ .Values.env.DB_NAME | quote }}
+  DB_USERNAME: {{ .Values.env.DB_USERNAME | quote }}
