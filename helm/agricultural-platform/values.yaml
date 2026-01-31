@@ -1,3 +1,4 @@
+# Application Configuration
 replicaCount: 1
 
 image:
@@ -22,3 +23,22 @@ serviceMonitor:
   enabled: true
   interval: 15s
   path: /actuator/prometheus
+
+# PostgreSQL Configuration
+postgresql:
+  host: agricultural-platform-postgres
+  port: 5432
+  database: agricultural_db
+  username: postgres
+  password: postgres123
+
+  storage:
+    size: 1Gi
+
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 250m
+      memory: 256Mi
