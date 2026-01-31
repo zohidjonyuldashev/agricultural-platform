@@ -1,6 +1,6 @@
 # Agricultural Digital Platform
 
-A cloud-based Digital Procurement Platform for Agriculture & Food Production built with modern DevOps practices.
+A Digital Procurement Platform for Agriculture & Food Production built with modern DevOps practices.
 
 ## 📋 Project Overview
 
@@ -9,7 +9,7 @@ This platform connects farmers, suppliers, distributors, and food-processing com
 | Component            | Technology                |
 |----------------------|---------------------------|
 | **Backend**          | Java 21, Spring Boot 3    |
-| **Database**         | H2 (In-memory)            |
+| **Database**         | PostgreSQL                |
 | **Containerization** | Docker                    |
 | **Orchestration**    | Kubernetes                |
 | **Package Manager**  | Helm                      |
@@ -54,7 +54,12 @@ helm/agricultural-platform/
 └── templates/
     ├── deployment.yaml
     ├── service.yaml
-    └── servicemonitor.yaml
+    ├── servicemonitor.yaml
+    ├── configmap.yaml           
+    ├── secret.yaml              
+    ├── postgres-deployment.yaml
+    ├── postgres-service.yaml
+    └── postgres-pvc.yaml
 ```
 
 ### ArgoCD Application
@@ -75,6 +80,7 @@ The application exposes the following custom business metrics:
 | `price_updates_total`             | Counter | Total number of price updates     |
 | `active_products_count`           | Gauge   | Currently available products      |
 | `pending_orders_count`            | Gauge   | Orders waiting to be processed    |
+
 ### Prometheus Metrics
 ![Alt text](screenshots/prometheus.png)
 ### Custom Grafana Dashboard
@@ -148,7 +154,12 @@ agricultural-platform/
 │       └── templates/
 │           ├── deployment.yaml
 │           ├── service.yaml
-│           └── servicemonitor.yaml
+│           ├── servicemonitor.yaml
+│           ├── configmap.yaml
+│           ├── secret.yaml
+│           ├── postgres-deployment.yaml
+│           ├── postgres-service.yaml
+│           └── postgres-pvc.yaml
 ├── Dockerfile
 ├── pom.xml
 └── README.md
