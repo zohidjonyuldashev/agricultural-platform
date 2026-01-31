@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: zohidjon30/agricultural-platform
-  tag: "3.5.10"
+  tag: "1.1.0"
   pullPolicy: IfNotPresent
 
 service:
