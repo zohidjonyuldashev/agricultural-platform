@@ -17,8 +17,9 @@ jobs:
       - name: Extract project version
         id: extract_version
         run: |
-          VERSION=$(grep -m1 '<version>' pom.xml | sed 's/.*<version>\(.*\)<\/version>.*/\1/')
+          VERSION=$(grep -A1 '<artifactId>agricultural-platform</artifactId>' pom.xml | grep '<version>' | sed 's/.*<version>\(.*\)<\/version>.*/\1/')
           echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+          echo "Extracted version: $VERSION"
 
       - name: Login to DockerHub
         uses: docker/login-action@v3
